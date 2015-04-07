@@ -1,3 +1,4 @@
+from __future__ import print_function, division
 import numpy as np
 import pandas as pd
 import string
@@ -18,7 +19,7 @@ def reapportionSeats(popv,includeOtherParties=False,method='state',nSeats=435,pr
     This is why we're not really ready for three parties, because "other" parties shouldn't always get a seat.
     """
     if includeOtherParties:
-        print 'Not ready for three parties!'
+        print('Not ready for three parties!')
         return popv
 
     if includeOtherParties:
@@ -56,14 +57,14 @@ def reapportionSeats(popv,includeOtherParties=False,method='state',nSeats=435,pr
                 else:
                     expectedSeats = np.ones([nParties,], dtype=np.int)
                 if printDebug:
-                    print popv[st]['state'] + st
-                    print popProp
-                    print 'party populations: '
-                    print partyPops
-                    print 'real seats: '
-                    print realSeats
-                    print 'expected seats: '
-                    print expectedSeats
+                    print(popv[st]['state'] + st)
+                    print(popProp)
+                    print('party populations: ')
+                    print(partyPops)
+                    print('real seats: ')
+                    print(realSeats)
+                    print('expected seats: ')
+                    print(expectedSeats)
             else:
                 # every state with more than 2 seats starts with one seat per party
                 expectedSeats = np.ones([nParties,], dtype=np.int)
@@ -93,17 +94,17 @@ def reapportionSeats(popv,includeOtherParties=False,method='state',nSeats=435,pr
                 partyPops[2] += popv[st]['othVotes']
 
         if printDebug:
-            print 'total party populations across the country'
-            print partyPops
+            print('total party populations across the country')
+            print(partyPops)
 
         totalPop = np.sum(partyPops)
 
         seatProp = [(x / float(totalPop)) * nSeats for x in partyPops]
         if printDebug:
-            print 'seat proportions'
-            print seatProp
-            print 'rounded seat proportions'
-            print np.rint(seatProp)
+            print('seat proportions')
+            print(seatProp)
+            print('rounded seat proportions')
+            print(np.rint(seatProp))
 
         # rounding democratic and republican seats up, other party seats down.
         # this is essentially hardcoded
@@ -117,7 +118,7 @@ def reapportionSeats(popv,includeOtherParties=False,method='state',nSeats=435,pr
             nOthSeats = 0
 
         if nDemSeats + nRepSeats + nOthSeats != nSeats:
-            print 'Rounding is not adding up to %d seats' % nSeats
+            print('Rounding is not adding up to %d seats' % nSeats)
             return popv
 
         nStates = len(popv)
@@ -165,7 +166,7 @@ def reapportionSeats(popv,includeOtherParties=False,method='state',nSeats=435,pr
             popv[st]['repDistExpect'] = np.int(repSeats[stateIdx])
             popv[st]['othDistExpect'] = np.int(othSeats[stateIdx])
     else:
-        print 'method must be \'state\' or \'country\''
+        print('method must be \'state\' or \'country\'')
     return popv
 
 def create_df_dist(popv,comp,dist,dfcensus,dfstatepvi,pviDict):
@@ -263,7 +264,7 @@ def create_df_dist(popv,comp,dist,dfcensus,dfstatepvi,pviDict):
 
             thisParty = pviDict[ficd_str]['name'][-2].upper()
             if thisParty not in ['D', 'R', 'I']:
-                print '%s is not a party, appending anyway'
+                print('%s is not a party, appending anyway')
             party.append(thisParty)
 
             # district PVI 114th congress
@@ -478,6 +479,8 @@ def gerry_score(dfdist,minDist=4,packMin=70,packMax=99,crackMin=35,crackMax=49,s
     # use unique so it preserves state order
     states = dfdist.state.unique()
     state_gerry = []
+    state_nogerry = []
+    state_noeval = []
 
     # convert votes to percentages; only use democratic and republican votes
     # totalVotes = df.nDemVotes_dist + df.nRepVotes_dist + df.nOthVotes_dist
@@ -546,6 +549,9 @@ def gerry_score(dfdist,minDist=4,packMin=70,packMax=99,crackMin=35,crackMax=49,s
                 seatDiff += delta_R
                 if majParty[0] == 'D' and redist_ctrl[0] == 'D':
                     ctrlPAdvantage = True
+            else:
+                state_nogerry.append(st)
+
             if gerryText != '' and redist_ctrl[0] == 'S':
                 thisGerryWeight = 0.5
                 gerryText += ' (probably not because redist control is Split, giving the seats back)'
@@ -553,27 +559,29 @@ def gerry_score(dfdist,minDist=4,packMin=70,packMax=99,crackMin=35,crackMax=49,s
                 seatDiff -= delta_R
 
             if printDebug and len(gerryText) > 0:
-                print '%s (%d dist), %s seats (D: %d, R: %d)'% (st, nDist, majParty, nDem, nRep)
-                print gerryText
-                print '\tnPackR: %d, nCrackR: %d' % (nPackR, nCrackR)
-                print '\tnPackD: %d, nCrackD: %d' % (nPackD, nCrackD)
-                print '\tpackedR = %s' % packedR
-                print '\tcrackedR = %s' % crackedR
-                print '\tpackedD = %s' % packedD
-                print '\tcrackedD = %s' % crackedD
-                print '\tgm score: %d, deltaSeats: %d' % (thisScore, thisState.delta_R.iloc[0])
-                print '\tredist ctrl: %s: %s; seat advantage: %s\n' % (redist_ctrl, redist_method, ctrlPAdvantage)
+                print('%s (%d dist), %s seats (D: %d, R: %d)'% (st, nDist, majParty, nDem, nRep))
+                print(gerryText)
+                print('\tnPackR: %d, nCrackR: %d' % (nPackR, nCrackR))
+                print('\tnPackD: %d, nCrackD: %d' % (nPackD, nCrackD))
+                print('\tpackedR = %s' % packedR)
+                print('\tcrackedR = %s' % crackedR)
+                print('\tpackedD = %s' % packedD)
+                print('\tcrackedD = %s' % crackedD)
+                print('\tgm score: %d, deltaSeats: %d' % (thisScore, thisState.delta_R.iloc[0]))
+                print('\tredist ctrl: %s: %s; seat advantage: %s\n' % (redist_ctrl, redist_method, ctrlPAdvantage))
+        else:
+            state_noeval.append(st)
 
         gerryScore.extend(np.tile(thisScore,nDist))
         gerryWeight.extend(np.tile(thisGerryWeight,nDist))
         ctrlPartySeatAdvantage.extend(np.tile(ctrlPAdvantage,nDist))
 
     #if printDebug:
-    print 'seat difference: %d (positive indicates number of R seats that should be D)' % seatDiff
-    print state_gerry
+    print('seat difference: %d (positive indicates number of R seats that should be D)' % seatDiff)
+    print(state_gerry)
 
     dfdist['gerryScore'] = gerryScore
     dfdist['gerryWeight'] = gerryWeight
     dfdist['ctrlPartySeatAdvantage'] = ctrlPartySeatAdvantage
 
-    return dfdist
+    return (dfdist, state_gerry)
