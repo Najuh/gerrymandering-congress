@@ -65,7 +65,7 @@ This project began when we wanted to know more about the state of gerrymandering
 
 # Utilities
 
-## Convert between state names, abbreviations, and FIPS numbers.
+## Convert between state names, abbreviations, and FIPS numbers
 
 - `data/st2Fips.json`: State (2 letter abbreviation) to FIPS numbers
 - `data/state2Fips.json`: State (full name) to FIPS numbers
@@ -78,32 +78,10 @@ This project began when we wanted to know more about the state of gerrymandering
 
 # Analysis
 
-## Expected number of representatives
+The notebook `python/analysis.ipynb` steps through the processing and analysis of:
 
-notebook: python/nExpectedReps_compactSummary.ipynb
-
-## Compactness and Redistricting
-
-notebook: python/Redistricting_and_compactness.ipynb
-
-## Compactness and District PVI
-
-notebook: python/Cooks_data_and_compactness_analysis.ipynb
-
-## Gerrymandering Score
-
-notebook: python/gerry_score.ipynb
-
-## GM Score and DIME
-
-notebook: python/DIME_analysis.ipynb
-
-# Visualization
-
-## Exporting for d3.js
-
-notebook: python/export_data_for_visualization.ipynb
-
-## Circles with district shapes
-
-notebook: python/Maps_and_viz.ipynb
+- Expected number of representatives (calculated in `python/nExpectedReps_compactSummary.ipynb`)
+- Compactness and Redistricting
+- Compactness and Gerrymandering Score
+- Compactness and District PVI
+- DIME and Gerrymandering Score
