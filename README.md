@@ -1,5 +1,7 @@
 # A Study of Gerrymandering
 
+This repository contains processing and analysis code that accompanies our [blogpost](http://svds.com/post/better-know-districts) and [interactive visualizations](http://svds.com/gerrymandering/).
+
 This project began when we wanted to know more about the state of gerrymandering in the United States. Our interest and subsequent exploration seems timely given the amount coverage gerrymandering has received in the news recently. This is clearly an important issue that many people are concerned about, and that many more people should be made aware of. After researching the information out there, we decided to take a quantitative approach and collected, visualized, and analyzed relevant publicly available datasets to test our hypotheses about how political parties are able to gain a seemingly unfair advantage in Congress given the voter demographics of some states. Is gerrymandering an issue when it comes to our congressional districts? Do you feel that your congressperson represents your views? We hope you take the time to explore these questions and decide for yourself. Please contact us with questions and comments!
 
 # Data sources and files
