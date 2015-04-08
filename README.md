@@ -6,7 +6,7 @@ This project began when we wanted to know more about the state of gerrymandering
 
 # Preprocessing
 
-The notebook `python/preprocess.ipynb` steps through data processing.
+The notebook `python/preprocess.ipynb` steps through data processing. This is a required step to perform the analyses.
 
 # Analysis
 
@@ -87,9 +87,9 @@ The notebook `python/analysis.ipynb` steps through the analyses:
 
 - source: http://data.stanford.edu/dime
 - notebook: `python/DIME_load_save.ipynb`
-- notes:
+- nb:
   - This data is not included in our repository. It must be acquired from the link above to perform the CFScore analysis in `analysis.ipynb`.
-  - We found issues in the dataset, namely regarding the winner of some congressional elections. These were fixed to the best of our ability for our analyses (the 2012 congressional elections).
+  - We found issues in the dataset, namely that the winners of some congressional elections were labeled incorrectly. We manually fixed the data for our analyses.
   - Once the dataset is downloaded and fixed, running this notebook will produce the necessary data for the DIME/CFScore analysis in `analysis.ipynb`.
-  - This notebook relies on a pickle file (`.pkl`) saved by `python/preprocess.ipynb`.
+  - This notebook relies on a `.pkl` file saved by `python/preprocess.ipynb`.
 
