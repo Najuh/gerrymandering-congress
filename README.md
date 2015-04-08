@@ -16,7 +16,8 @@ The notebook `python/analysis.ipynb` steps through the analyses:
 - Compactness and Redistricting
 - Compactness and Gerrymandering Score
 - Compactness and District PVI
-- DIME and Gerrymandering Score (nb: analyses involving the DIME data require downloading the data and processing it, which is described below)
+- DIME/CFScore and Gerrymandering Score
+  - nb: analyses involving the DIME data require downloading the data and processing it, which is described below.
 
 # Included Utilities
 
